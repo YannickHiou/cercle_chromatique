@@ -155,7 +155,7 @@ if __name__ == "__main__":
 
     crercle_chromatique_reorganise(canvas, CARRE_COTES)
      
-    save_canvas_as_png(canvas, "cercle.png")
+    save_canvas_as_png(canvas, "cercleJBR.png")
     
     root.mainloop()
 
