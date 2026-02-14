@@ -5,7 +5,13 @@
 - **Utilisateur** : la personne ou entité utilisant le logiciel (ci‑après « Utilisateur »).
 
 ## Objet
-Ce contrat régit l’utilisation des images générées par le logiciel fourni par le Fournisseur. Le code source du logiciel est distribué sous licence GNU GPL v3 ; la présente EULA ne modifie pas la licence du code lui‑même.
+Ce contrat régit l’utilisation des images générées par le logiciel fourni par le Fournisseur.  
+
+Le code source du programme est distribué sous la licence GNU GPL v3 ; la présente EULA ne modifie pas la licence du code lui‑même.  
+
+Les images sont produites à l’aide de trois paramètres Rt, Rs et Rp, qui sont les rayons des cercles concentriques séparant les zones de couleurs tertiaires, secondaires et primaires.  
+La configuration originale fixe Rt à 800, et fixe Rs et Rp de sorte que la surface des couleurs tertiaires soit trois fois celle des couleurs primaires et que la surface des couleurs secondaires soit deux fois celle des couleurs primaires, ce qui contribue à un certain équilibre du dessin.  
+Toute autre combinaison 0 < Rp < Rs < Rt constitue une paramétrisation acceptable et permet au programme de générer les images visées par la présente EULA.
 
 ## Propriété intellectuelle
 Le Fournisseur conserve tous les droits, titres et intérêts relatifs aux images générées par le logiciel (ci‑après « Images »). Les Images ne sont pas couvertes par la GPL v3 et ne sont pas concédées à l’Utilisateur par celle‑ci.
