@@ -5,14 +5,19 @@ Ce cercle chromatique réorganise celui de Johannes Itten : les six couleurs ter
 
 
 <div style="display:flex; gap:10px; justify-content:center;">
-  <img src="cercleJBR.png" alt="B" style="width:40%;" />
+  <img src="Yannick.Hiou.png" alt="B" style="width:40%;" />
+  <img src="Johannes.Itten.png" alt="B" style="width:40%;" />
 </div>
+
+<div style="display:flex; gap:10px; justify-content:center;">
+  <img src="legende.png" alt="B" style="width:80%;" />
+</div>
+
 
 ## Open source
     Licence : GPL v3 [https://www.gnu.org/licenses/gpl-3.0.html]
     
+## Commentaire
+Les images sont produites à l’aide d'une table de couleurs et de trois paramètres Rt, Rs et Rp, qui sont les rayons des cercles concentriques séparant les zones de couleurs tertiaires, secondaires et primaires.  
+La configuration originale fixe Rt à 800, et fixe Rs et Rp de sorte que la surface des couleurs tertiaires soit trois fois celle des couleurs primaires et que la surface des couleurs secondaires soit deux fois celle des couleurs primaires, ce qui contribue à un certain équilibre du dessin.
 
-Note sur les images :*
-Le code de ce programme est licencié sous la GNU GPL v3.
-
-Les images produites par ce programme ne sont pas couvertes par la licence GPL v3. Ces images restent la propriété de Yannick Hiou et sont protégées par un contrat de licence utilisateur final (EULA) distinct. Toute utilisation, reproduction, distribution, modification ou exploitation commerciale de ces images requiert une autorisation explicite conformément aux termes de cette EULA.
