@@ -5,7 +5,7 @@ Ce cercle chromatique réorganise celui de Johannes Itten : les six couleurs ter
 
 
 <div style="display:flex; gap:10px; justify-content:center;">
-  <img src="cercleJRB.png" alt="B" style="width:40%;" />
+  <img src="cercleJBR.png" alt="B" style="width:40%;" />
 </div>
 
 ## Open source
