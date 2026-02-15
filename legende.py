@@ -1,5 +1,5 @@
 #
-#   Tarot345Scores - Application de gestion des scores de Tarot
+#   Application to Generate Revisited Chromatic Circles
 #   Copyright (C) 2026  Yannick Hiou <yannick.hiou@gmail.com>
 #
 #   This program is free software: you can redistribute it and/or modify

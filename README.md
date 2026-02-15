@@ -53,4 +53,5 @@ python3 yannick.hiou.py  --Rs 100 --Rp 50
 ## Open source
     Licence : GPL v3 [https://www.gnu.org/licenses/gpl-3.0.html]
 
-    Les images sont libres pour les usages non commerciaux et soumises à EULA pour les usages commerciaux s'il devait y en avoir
+    Les images sont libres pour les usages non commerciaux et soumises à EULA pour 
+    les usages commerciaux s'il devait y en avoir
