@@ -1,9 +1,22 @@
-import re
+#
+#   Tarot345Scores - Application de gestion des scores de Tarot
+#   Copyright (C) 2026  Yannick Hiou <yannick.hiou@gmail.com>
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
 from PIL import Image, ImageDraw, ImageFont, ImageColor
-import traceback
-
-
-from PIL import ImageColor
 
 
 def to_rgb(hc):
@@ -193,7 +206,7 @@ def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
         ##              COULEURS PRIMAIRES
         ####################################################
         x_couleurs_primaires = 100
-        
+
         x0jaune = x_couleurs_primaires
         y0jaune = y0violet
         jaune = couleuresPrimaires[0]
@@ -383,37 +396,46 @@ def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
         tracer_ligne(draw, jaune, x1, y1, x2, y2)
 
         #######################################################
-        x0=x_couleurs_primaires -20
-        y0=y0rouge -15
-        x1= x0 + 260
-        y1 = y0 +260
+        x0 = x_couleurs_primaires - 20
+        y0 = y0rouge - 15
+        x1 = x0 + 260
+        y1 = y0 + 260
         draw.rounded_rectangle(
             [x0, y0, x1, y1], radius=10, fill=None, outline=(0, 0, 0), width=2
         )
 
-        x0=x_couleurs_secondaires -20
-        y0=y0orange -35
-        x1= x0 + 150
-        y1 = y0 +420
+        x0 = x_couleurs_secondaires - 20
+        y0 = y0orange - 35
+        x1 = x0 + 150
+        y1 = y0 + 420
         draw.rounded_rectangle(
             [x0, y0, x1, y1], radius=10, fill=None, outline=(0, 0, 0), width=2
         )
 
-        x0=x_couleurs_tertiaires -20
-        y0=y0ocre -35
-        x1= x0 + 150
-        y1 = y0 +450
+        x0 = x_couleurs_tertiaires - 20
+        y0 = y0ocre - 35
+        x1 = x0 + 150
+        y1 = y0 + 450
         draw.rounded_rectangle(
             [x0, y0, x1, y1], radius=10, fill=None, outline=(0, 0, 0), width=2
         )
 
-
-        afficher_texte(draw, font_bold, x_couleurs_primaires, 70, "Couleurs Primaires")
-        afficher_texte(draw, font_bold, x_couleurs_secondaires-30, 70, "Couleurs Secondaires")
-        afficher_texte(draw, font_bold, x_couleurs_tertiaires-30, 70, "Couleurs Tertiaires")
+        ########################################################
+        afficher_texte(
+            draw, font_bold, x_couleurs_primaires - 10, 70, "Trois couleurs Primaires"
+        )
+        afficher_texte(
+            draw,
+            font_bold,
+            x_couleurs_secondaires - 70,
+            70,
+            "Trois couleurs Secondaires",
+        )
+        afficher_texte(
+            draw, font_bold, x_couleurs_tertiaires - 60, 70, "Six couleurs Tertiaires"
+        )
 
         img.save(filename)
-        print("Wrote", filename)
+        print(filename)
     except Exception as e:
         print("ERROR saving image:", e)
-        traceback.print_exc()

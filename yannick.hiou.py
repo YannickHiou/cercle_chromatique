@@ -18,34 +18,30 @@
 
 #!/usr/bin/env python3
 import argparse
-
-import tkinter as tk
-from PIL import Image
-import yaml
-from pathlib import Path
-
 import math
-import io
+import yaml
+
+from pathlib import Path
+from PIL import Image, ImageDraw
 
 from legende import legende
 
 EPAISSEUR_DU_TRAIT = 6
-# CARRE_COTES = 800
 
 
-def dessiner_trait(canvas, w_c, y_c, r, O):
+def dessiner_trait(draw, x_c, y_c, r, Angle):
     # Convertir l'angle O en radians
-    angle_rad = math.radians(O)
+    angle_rad = math.radians(Angle)
 
     # Calculer les coordonnées de l'extrémité du trait
-    x_end = w_c + r * math.cos(angle_rad)
+    x_end = x_c + r * math.cos(angle_rad)
     y_end = y_c + r * math.sin(angle_rad)
 
     # Dessiner le trait
-    canvas.create_line(w_c, y_c, x_end, y_end, fill="black", width=EPAISSEUR_DU_TRAIT)
+    draw.line([(x_c, y_c), (x_end, y_end)], fill="black", width=EPAISSEUR_DU_TRAIT)
 
 
-def tracer_droite_cercles(canvas, x_c, y_c, O, R1, R2):
+def tracer_droite_cercles(draw, x_c, y_c, O, R1, R2):
     # Convertir l'angle O en radians
     angle_rad = math.radians(O)
 
@@ -57,10 +53,10 @@ def tracer_droite_cercles(canvas, x_c, y_c, O, R1, R2):
     y2 = y_c + R2 * math.sin(angle_rad)
 
     # Tracer la droite entre les deux points
-    canvas.create_line(x1, y1, x2, y2, fill="black", width=EPAISSEUR_DU_TRAIT)
+    draw.line([(x1, y1), (x2, y2)], fill="black", width=EPAISSEUR_DU_TRAIT)
 
 
-def arc_cercle(canvas, x_c, y_c, R, start_angle, end_angle):
+def arc_cercle(draw, x_c, y_c, R, start_angle, end_angle):
     # Calculer l'angle d'extension
     extent = end_angle - start_angle
 
@@ -71,94 +67,87 @@ def arc_cercle(canvas, x_c, y_c, R, start_angle, end_angle):
     y1 = y_c + R
 
     # Dessiner l'arc de cercle
-    canvas.create_arc(
-        x0,
-        y0,
-        x1,
-        y1,
+    draw.arc(
+        [x0, y0, x1, y1],
         start=start_angle,
-        extent=extent,
-        outline="black",
+        end=start_angle + extent,
+        fill=(0, 0, 0),
         width=EPAISSEUR_DU_TRAIT,
-        style=tk.ARC,
     )
 
 
-def cercle(canvas, x_c, y_c, R):
+def cercle(draw, x_c, y_c, R):
     x0 = x_c - R
     y0 = y_c - R
     x1 = x_c + R
     y1 = y_c + R
-    canvas.create_oval(
-        x0, y0, x1, y1, outline="black", fill="", width=EPAISSEUR_DU_TRAIT
+    draw.ellipse(
+        [x0, y0, x1, y1], outline=(0, 0, 0), fill=None, width=EPAISSEUR_DU_TRAIT
     )
 
 
-def courrone(canvas, x0, y0, r, phase, couleurs):
+def courrone(draw, x0, y0, r, phase, couleurs):
     for i in range(6):
         start_angle = phase + i * 60
         # Tracer le secteur
-        canvas.create_arc(
-            x0 - r,
-            y0 - r,
-            x0 + r,
-            y0 + r,
+        draw.pieslice(
+            [x0 - r, y0 - r, x0 + r, y0 + r],
             start=start_angle,
-            extent=60,
+            end=start_angle + 60,
             fill=couleurs[i]["code"],
-            outline="",
+            outline=None,
         )
 
 
-def centre(canvas, x0, y0, Rp, phase, couleur):
+def centre(draw, x0, y0, Rp, phase, couleur):
     for i in range(3):
         start_angle = phase + i * 120
         # Tracer le secteur
-        canvas.create_arc(
-            x0 - Rp,
-            y0 - Rp,
-            x0 + Rp,
-            y0 + Rp,
+        draw.pieslice(
+            [x0 - Rp, y0 - Rp, x0 + Rp, y0 + Rp],
             start=start_angle,
-            extent=120,
+            end=start_angle + 120,
             fill=couleur[i]["code"],
-            outline="",
+            outline=None,
         )
 
 
 # Fonction pour dessiner un cercle avec des secteurs colorés
 def crercle_chromatique_reorganise(
-    canvas,
     couleursPrimaire,
     couleursSecondairesAlternees,
     couleursTertiaires,
     Rt,
     Rs,
     Rp,
-):
-    # Créer un canvas
-    canvas.pack()
+    filename,
+):    
+    img = Image.new("RGBA", (int(2 * Rt), int(2 * Rt)), (255, 255, 255, 255))
+    draw = ImageDraw.Draw(img)
 
     x0 = Rt
     y0 = Rt
 
-    courrone(canvas, x0, y0, Rt, 30, couleursTertiaires)
-    courrone(canvas, x0, y0, Rs, 60, couleursSecondairesAlternees)
-    centre(canvas, x0, y0, Rp, 30, couleursPrimaire)
+    courrone(draw, x0, y0, Rt, 30, couleursTertiaires)
+    courrone(draw, x0, y0, Rs, 60, couleursSecondairesAlternees)
+    centre(draw, x0, y0, Rp, 30, couleursPrimaire)
 
-    cercle(canvas, x0, y0, Rt)
-    cercle(canvas, x0, y0, Rs)
-    arc_cercle(canvas, x0, y0, Rp, 0, 60)
-    arc_cercle(canvas, x0, y0, Rp, 120, 180)
-    arc_cercle(canvas, x0, y0, Rp, 240, 300)
+    cercle(draw, x0, y0, Rt)
+    cercle(draw, x0, y0, Rs)
+    arc_cercle(draw, x0, y0, Rp, 0, 60)
+    arc_cercle(draw, x0, y0, Rp, 120, 180)
+    arc_cercle(draw, x0, y0, Rp, 240, 300)
     for i in range(6):
-        tracer_droite_cercles(canvas, x0, y0, 30 + 60 * i, Rt, Rs)
+        tracer_droite_cercles(draw, x0, y0, 30 + 60 * i, Rt, Rs)
 
     for i in range(6):
-        tracer_droite_cercles(canvas, x0, y0, 60 * i, Rs, Rp)
+        tracer_droite_cercles(draw, x0, y0, 60 * i, Rs, Rp)
 
     for i in range(3):
-        dessiner_trait(canvas, x0, y0, Rp, -30 + 120 * i)
+        dessiner_trait(draw, x0, y0, Rp, 30 + 120 * i)
+    
+    print(filename)
+    img.save(filename)
 
 
 def charge_les_couleurs(path: str, genre) -> dict:
@@ -220,22 +209,12 @@ def charge_les_couleurs(path: str, genre) -> dict:
     return couleursPrimaire, couleursSecondairesAlternees, couleursTertiaires
 
 
-def save_canvas_as_png(canvas, filename):
-    # Obtenir le postscript du canevas
-    canvas.update()  # Assurez-vous que le canevas est à jour
-    ps = canvas.postscript(colormode="color")
-
-    # Convertir le postscript en image
-    img = Image.open(io.BytesIO(ps.encode("utf-8")))
-    img.save(filename, "png")
-
-
 def parse_args():
     p = argparse.ArgumentParser(description="Paramètres des zones de couleurs")
     p.add_argument(
         "--Rt",
         type=float,
-        default=400.0,
+        default=200.0,
         help="rayon des couleurs tertiaires (par défaut 400)",
     )
     p.add_argument(
@@ -259,7 +238,6 @@ def parse_args():
     return p.parse_args()
 
 
-
 if __name__ == "__main__":
     args = parse_args()
 
@@ -281,22 +259,16 @@ if __name__ == "__main__":
         )
     )
 
-    # root = tk.Tk()
-    # root.title("Cercle coloré")
-    # canvas_cercle = tk.Canvas(root, width=2 * Rt, height=2 * Rt, bg="white")
-    # crercle_chromatique_reorganise(
-    #     canvas_cercle,
-    #     couleursPrimaire,
-    #     couleursSecondairesAlternees,
-    #     couleursTertiaires,
-    #     Rt,
-    #     Rs,
-    #     Rp,
-    # )
-    # save_canvas_as_png(canvas_cercle, "Yannick.Hiou.png")
-    # root.mainloop()
+    crercle_chromatique_reorganise(
+        couleursPrimaire,
+        couleursSecondairesAlternees,
+        couleursTertiaires,
+        Rt,
+        Rs,
+        Rp,
+        "Yannick.Hiou.png",
+    )
 
-    legende(couleursSecondairesAlternees, couleursTertiaires,"legende.png")
-    
+    legende(couleursSecondairesAlternees, couleursTertiaires, "legende.png")
+
     pass
-    
