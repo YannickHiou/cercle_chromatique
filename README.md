@@ -16,9 +16,6 @@ Je partage ce cercle chromatique que j'ai créé pour des besoins pédagogiques 
 </div>
 
 
-## Open source
-    Licence : GPL v3 [https://www.gnu.org/licenses/gpl-3.0.html]
-    
 ## Commentaire
 Les images sont produites à l’aide d'une table de couleurs et de trois paramètres Rt, Rs et Rp, qui sont respectivement les rayons des cercles concentriques séparant les zones de couleurs Tertiaires, Secondaires et Primaires.  
 La configuration originale fixe Rt à 200, et fixe Rs et Rp de sorte que la surface des couleurs Tertiaires soit trois fois celle des couleurs Primaires et que la surface des couleurs Secondaires alternées soit deux fois celle des couleurs Primaires.
@@ -52,3 +49,8 @@ puthon3 yannick.hiou.py
 
 python3 yannick.hiou.py  --Rs 100 --Rp 50
 ```
+
+## Open source
+    Licence : GPL v3 [https://www.gnu.org/licenses/gpl-3.0.html]
+
+    Les images sont libres pour les usages non commerciaux et soumises à EULA pour les usages commerciaux s'il devait y en avoir
