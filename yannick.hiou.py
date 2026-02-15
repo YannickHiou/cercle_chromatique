@@ -69,8 +69,8 @@ def arc_cercle(draw, x_c, y_c, R, start_angle, end_angle):
     # Dessiner l'arc de cercle
     draw.arc(
         [x0, y0, x1, y1],
-        start=start_angle,
-        end=start_angle + extent,
+        start=-end_angle,
+        end=-start_angle,
         fill=(0, 0, 0),
         width=EPAISSEUR_DU_TRAIT,
     )
@@ -88,27 +88,27 @@ def cercle(draw, x_c, y_c, R):
 
 def courrone(draw, x0, y0, r, phase, couleurs):
     for i in range(6):
-        start_angle = phase + i * 60
+        start_angle = -(phase + i * 60)
         # Tracer le secteur
         draw.pieslice(
             [x0 - r, y0 - r, x0 + r, y0 + r],
-            start=start_angle,
-            end=start_angle + 60,
+            start=start_angle - 60,
+            end=start_angle,
             fill=couleurs[i]["code"],
-            outline=None,
+            outline=None
         )
 
 
 def centre(draw, x0, y0, Rp, phase, couleur):
     for i in range(3):
-        start_angle = phase + i * 120
+        start_angle = -(phase + i * 120)
         # Tracer le secteur
         draw.pieslice(
             [x0 - Rp, y0 - Rp, x0 + Rp, y0 + Rp],
-            start=start_angle,
-            end=start_angle + 120,
+            start=start_angle - 120,
+            end=start_angle,
             fill=couleur[i]["code"],
-            outline=None,
+            outline=None
         )
 
 
@@ -144,7 +144,7 @@ def crercle_chromatique_reorganise(
         tracer_droite_cercles(draw, x0, y0, 60 * i, Rs, Rp)
 
     for i in range(3):
-        dessiner_trait(draw, x0, y0, Rp, 30 + 120 * i)
+        dessiner_trait(draw, x0, y0, Rp, -30 + 120 * i)
     
     print(filename)
     img.save(filename)
