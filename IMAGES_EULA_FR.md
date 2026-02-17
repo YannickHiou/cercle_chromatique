@@ -10,7 +10,7 @@ Ce contrat régit l'utilisation des images générées par le logiciel fourni pa
 Le code source du programme est distribué sous la licence GNU GPL v3 ; la présente EULA ne modifie pas la licence du code lui‑même.  
 
 Les images sont produites à l'aide d'une table de couleurs et de trois paramètres Rt, Rs et Rp, qui sont les rayons des cercles concentriques séparant les zones de couleurs tertiaires, secondaires et primaires.  
-La configuration originale fixe Rt à 200, et fixe Rs et Rp de sorte que la surface des couleurs tertiaires soit trois fois celle des couleurs primaires et que la surface des couleurs secondaires alternées soit deux fois celle des couleurs primaires, ce qui contribue à un certain équilibre du dessin.  
+La configuration originale fixe Rt à 200, et calcule Rs et Rp de sorte que la surface des couleurs tertiaires soit trois fois celle des couleurs primaires et que la surface des couleurs secondaires alternées soit deux fois celle des couleurs primaires, ce qui contribue à un certain équilibre du dessin.  
 Toute autre table de couleurs et combinaison 0 < Rp < Rs < Rt constituent une paramétrisation acceptable et permet au programme de générer les images visées par la présente EULA.
 
 ## Propriété intellectuelle

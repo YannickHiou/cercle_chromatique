@@ -246,18 +246,18 @@ if __name__ == "__main__":
     Rp = args.Rp
     Orientation = args.orientation
 
+    couleursPrimaire, couleursSecondairesAlternees, couleursTertiaires = (
+        charge_les_couleurs(
+            "couleurs.yml", True if Orientation.lower() == "droite" else False
+        )
+    )
+
     if Rs is None or Rp is None:
         # avec ces valeurs de Rs et de Rp :
         # 1) la surface des couleurs tertiaires est trois fois celle des couleurs primaires
         # 2) la surface des couleurs secondaires alternées est deux fois celle des couleurs primaires
         Rs = Rt / (2) ** (1 / 2)
         Rp = Rt / (6) ** (1 / 2)
-
-    couleursPrimaire, couleursSecondairesAlternees, couleursTertiaires = (
-        charge_les_couleurs(
-            "couleurs.yml", True if Orientation.lower() == "droite" else False
-        )
-    )
 
     crercle_chromatique_reorganise(
         couleursPrimaire,

@@ -62,15 +62,8 @@ def tracer_ligne(draw, couleur, x1, y1, x2, y2, width=4):
 
 def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
     font_size = 16
-    pad_x = 20
-    pad_y = 18
-    spacing_y = 12
-    col_gap = 40
-    label_gap = 12
     padding_inbox = 40
-    padding_interbox = 20
-    border_padding = 20
-    rect_h = max(font_size + 12, 60)
+    rect_h = 60
 
     try:
         font = ImageFont.truetype("DejaVuSans.ttf", font_size)
@@ -128,8 +121,6 @@ def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
         y_couleurs_tertiaires = 150
 
         x0 = x_couleurs_tertiaires - 60
-        # y0 = 100
-        # afficher_texte(draw, font_bold, x0, y0, "Couleurs Tertiaires")
 
         ########### OCRE ############
         x0ocre = x_couleurs_tertiaires
@@ -182,7 +173,6 @@ def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
 
         x0 = x_couleurs_secondaires - 30
         y0 = 90
-        # afficher_texte(draw, font_bold, x0, y0, "Couleurs Secondaires")
 
         ########### ORANGE ############
         x0orange = x_couleurs_secondaires
@@ -395,7 +385,10 @@ def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
         y2 = y_ligne_jaune1
         tracer_ligne(draw, jaune, x1, y1, x2, y2)
 
-        #######################################################
+        ####################################################
+        ## LES TROIS ZONZE DE COULEURS
+        ####################################################
+        # COULEURS PRIMAIRES
         x0 = x_couleurs_primaires - 20
         y0 = y0rouge - 15
         x1 = x0 + 260
@@ -403,7 +396,7 @@ def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
         draw.rounded_rectangle(
             [x0, y0, x1, y1], radius=10, fill=None, outline=(0, 0, 0), width=2
         )
-
+        # COULEURS SECONDAIRES
         x0 = x_couleurs_secondaires - 20
         y0 = y0orange - 35
         x1 = x0 + 150
@@ -412,6 +405,7 @@ def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
             [x0, y0, x1, y1], radius=10, fill=None, outline=(0, 0, 0), width=2
         )
 
+        # COULEURS TERTIAIRES
         x0 = x_couleurs_tertiaires - 20
         y0 = y0ocre - 35
         x1 = x0 + 150
@@ -420,9 +414,15 @@ def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
             [x0, y0, x1, y1], radius=10, fill=None, outline=(0, 0, 0), width=2
         )
 
-        ########################################################
+        ####################################################
+        ## NOMMER CHAQUE ZONZE DE COULEURS
+        ####################################################
         afficher_texte(
-            draw, font_bold, x_couleurs_primaires - 10, 70, "Trois couleurs Primaires"
+            draw,
+            font_bold,
+            x_couleurs_primaires - 10,
+            70,
+            "Trois couleurs Primaires",
         )
         afficher_texte(
             draw,
@@ -432,7 +432,11 @@ def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
             "Trois couleurs Secondaires",
         )
         afficher_texte(
-            draw, font_bold, x_couleurs_tertiaires - 60, 70, "Six couleurs Tertiaires"
+            draw,
+            font_bold,
+            x_couleurs_tertiaires - 60,
+            70,
+            "Six couleurs Tertiaires",
         )
 
         img.save(filename)
