@@ -93,14 +93,14 @@ def legende(couleursSecondairesAlternees, couleursTertiaires, filename: str):
         couleursTertiaires[5],
     ]
 
-    routesCouleurs = couleuresPrimaires + couleuresSecondaires + couleuresTertiaires
+    toutesCouleurs = couleuresPrimaires + couleuresSecondaires + couleuresTertiaires
 
     try:
-        # measure text
+        # Mesure la largueur des boites de couleur
         dummy = Image.new("RGB", (1, 1))
         dd = ImageDraw.Draw(dummy)
         max_text_w = 0
-        for name, _ in routesCouleurs:
+        for name, _ in toutesCouleurs:
             try:
                 bbox = dd.textbbox((0, 0), name, font=font)
                 w = bbox[2] - bbox[0]
